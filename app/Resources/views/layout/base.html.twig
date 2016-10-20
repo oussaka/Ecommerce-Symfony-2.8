@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Mon Commerce | {{ titre }}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}" />
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ path('homepage') }}">CamelShop</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Rechercher un produit">
+                </div>
+                <button type="submit" class="btn btn-default">Go !</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
+                        <li><a href="{{ path('fos_user_registration_register') }}">S'inscrire</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+{% block body %}{% endblock %}
+
+<hr />
+<footer id="footer" class="vspace20">
+    <div class="container">
+        <div class="row">
+            <div class="span4 offset1">
+                <h4>Informations</h4>
+                <ul class="nav nav-stacked">
+                    <li><a href="{{ path('pages_pages_index', { 'id' : 1 }) }}">CGV</a>
+                    <li><a href="{{ path('pages_pages_index', { 'id' : 2 }) }}">Mentions légales</a>
+                </ul>
+            </div>
+
+            <div class="span4">
+                <h4>Notre entrepôt</h4>
+                <p><i class="icon-map-marker"></i>&nbsp;Troyes 10 000 - 9 Rue de Quebec</p>
+            </div>
+
+            <div class="span2">
+                <h4>Nous contacter</h4>
+                <p><i class="icon-phone"></i>&nbsp;Tel: 06 06 06 06 06</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span4">
+                <p>&copy; Copyright 2016 - Etienne Fontaine</p>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{{ asset('js/jquery-1.10.0.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>

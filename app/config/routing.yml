@@ -1,0 +1,17 @@
+ecommerce:
+    resource: "@EcommerceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+pages:
+    resource: "@PagesBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+utilisateurs:
+    resource: "@UtilisateursBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
