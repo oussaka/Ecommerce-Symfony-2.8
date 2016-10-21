@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new PagesBundle\PagesBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new UtilisateursBundle\UtilisateursBundle(),
+            new EWZ\Bundle\RecaptchaBundle\EWZRecaptchaBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'), true)) {

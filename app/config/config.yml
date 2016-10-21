@@ -37,6 +37,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form_theme:
+            - 'Form/bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:
@@ -73,3 +75,13 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: UtilisateursBundle\Entity\Utilisateurs
+    registration:
+          form:
+              type: UtilisateursBundle\Form\RegistrationType
+
+# Captcha
+ewz_recaptcha:
+    public_key:  6Lc69AkUAAAAAMPRv1Jqyq0PAYKrIkE07gn6s120
+    private_key: 6Lc69AkUAAAAACERuN0aE983qHb38Ja7C1c6YEFS
+    # Not needed as "%kernel.default_locale%" is the default value for the locale key
+    locale_key:  %kernel.default_locale%
