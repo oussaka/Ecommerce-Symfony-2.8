@@ -24,13 +24,14 @@ class Produits
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=100)
+     * @ORM\Column(name="nom", type="string", length=45)
      */
     private $nom;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="description", type="string", length=45)
      */
     private $description;
 
@@ -48,32 +49,11 @@ class Produits
      */
     private $disponible;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="categorie", type="string", length=80)
-     */
-    private $categorie;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255)
-     */
-    private $image;
-
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="tva", type="float")
-     */
-    private $tva;
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return int
      */
     public function getId()
     {
@@ -84,6 +64,7 @@ class Produits
      * Set nom
      *
      * @param string $nom
+     *
      * @return Produits
      */
     public function setNom($nom)
@@ -96,7 +77,7 @@ class Produits
     /**
      * Get nom
      *
-     * @return string 
+     * @return string
      */
     public function getNom()
     {
@@ -104,124 +85,10 @@ class Produits
     }
 
     /**
-     * Set prix
-     *
-     * @param float $prix
-     * @return Produits
-     */
-    public function setPrix($prix)
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    /**
-     * Get prix
-     *
-     * @return float 
-     */
-    public function getPrix()
-    {
-        return $this->prix;
-    }
-
-    /**
-     * Set disponible
-     *
-     * @param boolean $disponible
-     * @return Produits
-     */
-    public function setDisponible($disponible)
-    {
-        $this->disponible = $disponible;
-
-        return $this;
-    }
-
-    /**
-     * Get disponible
-     *
-     * @return boolean 
-     */
-    public function getDisponible()
-    {
-        return $this->disponible;
-    }
-
-    /**
-     * Set categorie
-     *
-     * @param string $categorie
-     * @return Produits
-     */
-    public function setCategorie($categorie)
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
-
-    /**
-     * Get categorie
-     *
-     * @return string 
-     */
-    public function getCategorie()
-    {
-        return $this->categorie;
-    }
-
-    /**
-     * Set image
-     *
-     * @param string $image
-     * @return Produits
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return string 
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * Set tva
-     *
-     * @param float $tva
-     * @return Produits
-     */
-    public function setTva($tva)
-    {
-        $this->tva = $tva;
-
-        return $this;
-    }
-
-    /**
-     * Get tva
-     *
-     * @return float 
-     */
-    public function getTva()
-    {
-        return $this->tva;
-    }
-
-    /**
      * Set description
      *
      * @param string $description
+     *
      * @return Produits
      */
     public function setDescription($description)
@@ -234,10 +101,59 @@ class Produits
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
         return $this->description;
     }
+
+    /**
+     * Set prix
+     *
+     * @param float $prix
+     *
+     * @return Produits
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return float
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set disponible
+     *
+     * @param boolean $disponible
+     *
+     * @return Produits
+     */
+    public function setDisponible($disponible)
+    {
+        $this->disponible = $disponible;
+
+        return $this;
+    }
+
+    /**
+     * Get disponible
+     *
+     * @return bool
+     */
+    public function getDisponible()
+    {
+        return $this->disponible;
+    }
 }
+
