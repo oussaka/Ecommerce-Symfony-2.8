@@ -22,6 +22,24 @@ class Produits
     private $id;
 
     /**
+     * @ORM\OneToOne(targetEntity="EcommerceBundle\Entity\Media", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EcommerceBundle\Entity\Tva", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $tva;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="EcommerceBundle\Entity\Categories", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $categories;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=45)
@@ -155,5 +173,76 @@ class Produits
     {
         return $this->disponible;
     }
-}
 
+    /**
+     * Set image
+     *
+     * @param \EcommerceBundle\Entity\Media $image
+     *
+     * @return Produits
+     */
+    public function setImage(\EcommerceBundle\Entity\Media $image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \EcommerceBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set tva
+     *
+     * @param \EcommerceBundle\Entity\Tva $tva
+     *
+     * @return Produits
+     */
+    public function setTva(\EcommerceBundle\Entity\Tva $tva)
+    {
+        $this->tva = $tva;
+
+        return $this;
+    }
+
+    /**
+     * Get tva
+     *
+     * @return \EcommerceBundle\Entity\Tva
+     */
+    public function getTva()
+    {
+        return $this->tva;
+    }
+
+    /**
+     * Set categories
+     *
+     * @param \EcommerceBundle\Entity\Categories $categories
+     *
+     * @return Produits
+     */
+    public function setCategories(\EcommerceBundle\Entity\Categories $categories)
+    {
+        $this->categories = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \EcommerceBundle\Entity\Categories
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+}

@@ -285,45 +285,5 @@ class UtilisateursAdresses
     {
         return $this->complement;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add utilisateur
-     *
-     * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
-     *
-     * @return UtilisateursAdresses
-     */
-    public function addUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
-    {
-        $this->utilisateur[] = $utilisateur;
-
-        return $this;
-    }
-
-    /**
-     * Remove utilisateur
-     *
-     * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
-     */
-    public function removeUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
-    {
-        $this->utilisateur->removeElement($utilisateur);
-    }
-
-    /**
-     * Get utilisateur
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUtilisateur()
-    {
-        return $this->utilisateur;
-    }
 }
+
