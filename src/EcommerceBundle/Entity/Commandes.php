@@ -49,9 +49,9 @@ class Commandes
     private $reference;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="produits", type="string", length=255)
+     * @ORM\Column(name="produits", type="array")
      */
     private $produits;
 
@@ -141,7 +141,7 @@ class Commandes
     /**
      * Set produits
      *
-     * @param string $produits
+     * @param array $produits
      *
      * @return Commandes
      */
@@ -155,31 +155,22 @@ class Commandes
     /**
      * Get produits
      *
-     * @return string
+     * @return array
      */
     public function getProduits()
     {
         return $this->produits;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add utilisateur
+     * Set utilisateur
      *
      * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
-     *
      * @return Commandes
      */
-    public function addUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
+    public function setUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur = null)
     {
-        $this->utilisateur[] = $utilisateur;
-
+        $this->utilisateur = $utilisateur;
         return $this;
     }
 
@@ -196,7 +187,7 @@ class Commandes
     /**
      * Get utilisateur
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \UtilisateursBundle\Entity\Utilisateurs
      */
     public function getUtilisateur()
     {

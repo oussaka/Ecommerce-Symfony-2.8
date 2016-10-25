@@ -98,7 +98,6 @@ hwi_oauth:
             scope:               "email"
             paths:
                 email:           email
-                profilepicture:  picture.data.url
     http_client:
                 verify_peer: false
 

@@ -294,13 +294,13 @@ class UtilisateursAdresses
     }
 
     /**
-     * Add utilisateur
+     * Set utilisateur
      *
      * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
      *
      * @return UtilisateursAdresses
      */
-    public function addUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
+    public function setUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
     {
         $this->utilisateur[] = $utilisateur;
 

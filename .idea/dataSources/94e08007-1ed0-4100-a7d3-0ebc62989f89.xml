@@ -85,306 +85,312 @@
     <column id="34" parent="9" name="credentials_expire_at">
       <data-type>datetime|0</data-type>
     </column>
-    <index id="35" parent="9" name="UNIQ_497B315E92FC23A8">
+    <column id="35" parent="9" name="facebook_id">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="36" parent="9" name="profilepicture">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <index id="37" parent="9" name="UNIQ_497B315E92FC23A8">
       <columns>username_canonical</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="36" parent="9" name="UNIQ_497B315EA0D96FBF">
+    <index id="38" parent="9" name="UNIQ_497B315EA0D96FBF">
       <columns>email_canonical</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="37" parent="9" name="UNIQ_497B315EC05FB297">
+    <index id="39" parent="9" name="UNIQ_497B315EC05FB297">
       <columns>confirmation_token</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="38" parent="9" name="PRIMARY">
+    <key id="40" parent="9" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <key id="39" parent="9" name="UNIQ_497B315E92FC23A8">
+    <key id="41" parent="9" name="UNIQ_497B315E92FC23A8">
       <columns>username_canonical</columns>
       <underlying-index>UNIQ_497B315E92FC23A8</underlying-index>
     </key>
-    <key id="40" parent="9" name="UNIQ_497B315EA0D96FBF">
+    <key id="42" parent="9" name="UNIQ_497B315EA0D96FBF">
       <columns>email_canonical</columns>
       <underlying-index>UNIQ_497B315EA0D96FBF</underlying-index>
     </key>
-    <key id="41" parent="9" name="UNIQ_497B315EC05FB297">
+    <key id="43" parent="9" name="UNIQ_497B315EC05FB297">
       <columns>confirmation_token</columns>
       <underlying-index>UNIQ_497B315EC05FB297</underlying-index>
     </key>
-    <column id="42" parent="10" name="id">
+    <column id="44" parent="10" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="43" parent="10" name="image_id">
+    <column id="45" parent="10" name="image_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="44" parent="10" name="nom">
+    <column id="46" parent="10" name="nom">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <index id="45" parent="10" name="UNIQ_3AF346683DA5256D">
+    <index id="47" parent="10" name="UNIQ_3AF346683DA5256D">
       <columns>image_id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="46" parent="10" name="PRIMARY">
+    <key id="48" parent="10" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <key id="47" parent="10" name="UNIQ_3AF346683DA5256D">
+    <key id="49" parent="10" name="UNIQ_3AF346683DA5256D">
       <columns>image_id</columns>
       <underlying-index>UNIQ_3AF346683DA5256D</underlying-index>
     </key>
-    <foreign-key id="48" parent="10" name="FK_3AF346683DA5256D">
+    <foreign-key id="50" parent="10" name="FK_3AF346683DA5256D">
       <columns>image_id</columns>
       <ref-key>~.media.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="49" parent="11" name="id">
+    <column id="51" parent="11" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="50" parent="11" name="valider">
+    <column id="52" parent="11" name="valider">
       <mandatory>1</mandatory>
       <data-type>tinyint(1)|0</data-type>
     </column>
-    <column id="51" parent="11" name="date">
+    <column id="53" parent="11" name="date">
       <mandatory>1</mandatory>
       <data-type>datetime|0</data-type>
     </column>
-    <column id="52" parent="11" name="reference">
+    <column id="54" parent="11" name="reference">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="53" parent="11" name="produits">
+    <column id="55" parent="11" name="produits">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <key id="54" parent="11" name="PRIMARY">
+    <key id="56" parent="11" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="55" parent="12" name="commandes_id">
+    <column id="57" parent="12" name="commandes_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="56" parent="12" name="utilisateurs_id">
+    <column id="58" parent="12" name="utilisateurs_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="57" parent="12" name="IDX_1585DEBA1E969C5">
+    <index id="59" parent="12" name="IDX_1585DEBA1E969C5">
       <columns>utilisateurs_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="58" parent="12" name="IDX_1585DEBA8BF5C2E6">
+    <index id="60" parent="12" name="IDX_1585DEBA8BF5C2E6">
       <columns>commandes_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="59" parent="12" name="PRIMARY">
+    <key id="61" parent="12" name="PRIMARY">
       <columns>commandes_id
 utilisateurs_id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="60" parent="12" name="FK_1585DEBA8BF5C2E6">
+    <foreign-key id="62" parent="12" name="FK_1585DEBA8BF5C2E6">
       <columns>commandes_id</columns>
       <ref-key>~.commandes.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="61" parent="12" name="FK_1585DEBA1E969C5">
+    <foreign-key id="63" parent="12" name="FK_1585DEBA1E969C5">
       <columns>utilisateurs_id</columns>
       <ref-key>~.utilisateurs.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <column id="62" parent="13" name="id">
+    <column id="64" parent="13" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="63" parent="13" name="path">
+    <column id="65" parent="13" name="path">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="64" parent="13" name="alt">
+    <column id="66" parent="13" name="alt">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <key id="65" parent="13" name="PRIMARY">
+    <key id="67" parent="13" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="66" parent="14" name="id">
+    <column id="68" parent="14" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="67" parent="14" name="image_id">
+    <column id="69" parent="14" name="image_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="68" parent="14" name="tva_id">
+    <column id="70" parent="14" name="tva_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="69" parent="14" name="categories_id">
+    <column id="71" parent="14" name="categories_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="70" parent="14" name="nom">
+    <column id="72" parent="14" name="nom">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="71" parent="14" name="description">
+    <column id="73" parent="14" name="description">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="72" parent="14" name="prix">
+    <column id="74" parent="14" name="prix">
       <mandatory>1</mandatory>
       <data-type>double|0</data-type>
     </column>
-    <column id="73" parent="14" name="disponible">
+    <column id="75" parent="14" name="disponible">
       <mandatory>1</mandatory>
       <data-type>tinyint(1)|0</data-type>
     </column>
-    <index id="74" parent="14" name="IDX_BE2DDF8C4D79775F">
+    <index id="76" parent="14" name="IDX_BE2DDF8C4D79775F">
       <columns>tva_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="75" parent="14" name="IDX_BE2DDF8CA21214B7">
+    <index id="77" parent="14" name="IDX_BE2DDF8CA21214B7">
       <columns>categories_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="76" parent="14" name="UNIQ_BE2DDF8C3DA5256D">
+    <index id="78" parent="14" name="UNIQ_BE2DDF8C3DA5256D">
       <columns>image_id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="77" parent="14" name="PRIMARY">
+    <key id="79" parent="14" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <key id="78" parent="14" name="UNIQ_BE2DDF8C3DA5256D">
+    <key id="80" parent="14" name="UNIQ_BE2DDF8C3DA5256D">
       <columns>image_id</columns>
       <underlying-index>UNIQ_BE2DDF8C3DA5256D</underlying-index>
     </key>
-    <foreign-key id="79" parent="14" name="FK_BE2DDF8C3DA5256D">
+    <foreign-key id="81" parent="14" name="FK_BE2DDF8C3DA5256D">
       <columns>image_id</columns>
       <ref-key>~.media.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="80" parent="14" name="FK_BE2DDF8C4D79775F">
+    <foreign-key id="82" parent="14" name="FK_BE2DDF8C4D79775F">
       <columns>tva_id</columns>
       <ref-key>~.tva.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="81" parent="14" name="FK_BE2DDF8CA21214B7">
+    <foreign-key id="83" parent="14" name="FK_BE2DDF8CA21214B7">
       <columns>categories_id</columns>
       <ref-key>~.categories.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="82" parent="15" name="id">
+    <column id="84" parent="15" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="83" parent="15" name="multiplicate">
+    <column id="85" parent="15" name="multiplicate">
       <mandatory>1</mandatory>
       <data-type>double|0</data-type>
     </column>
-    <column id="84" parent="15" name="nom">
+    <column id="86" parent="15" name="nom">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="85" parent="15" name="valeur">
+    <column id="87" parent="15" name="valeur">
       <mandatory>1</mandatory>
       <data-type>double|0</data-type>
     </column>
-    <key id="86" parent="15" name="PRIMARY">
+    <key id="88" parent="15" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="87" parent="16" name="id">
+    <column id="89" parent="16" name="id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
       <sequence-identity>1</sequence-identity>
     </column>
-    <column id="88" parent="16" name="nom">
+    <column id="90" parent="16" name="nom">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="89" parent="16" name="prenom">
+    <column id="91" parent="16" name="prenom">
       <mandatory>1</mandatory>
       <data-type>varchar(45)|0</data-type>
     </column>
-    <column id="90" parent="16" name="telephone">
+    <column id="92" parent="16" name="telephone">
       <mandatory>1</mandatory>
       <data-type>varchar(20)|0</data-type>
     </column>
-    <column id="91" parent="16" name="adresse">
+    <column id="93" parent="16" name="adresse">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="92" parent="16" name="cp">
+    <column id="94" parent="16" name="cp">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="93" parent="16" name="pays">
+    <column id="95" parent="16" name="pays">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="94" parent="16" name="ville">
+    <column id="96" parent="16" name="ville">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="95" parent="16" name="complement">
+    <column id="97" parent="16" name="complement">
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <key id="96" parent="16" name="PRIMARY">
+    <key id="98" parent="16" name="PRIMARY">
       <columns>id</columns>
       <primary>1</primary>
     </key>
-    <column id="97" parent="17" name="utilisateurs_adresses_id">
+    <column id="99" parent="17" name="utilisateurs_adresses_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <column id="98" parent="17" name="utilisateurs_id">
+    <column id="100" parent="17" name="utilisateurs_id">
       <mandatory>1</mandatory>
       <data-type>int(11)|0</data-type>
     </column>
-    <index id="99" parent="17" name="IDX_3A3EC4231E969C5">
+    <index id="101" parent="17" name="IDX_3A3EC4231E969C5">
       <columns>utilisateurs_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="100" parent="17" name="IDX_3A3EC4239B6A2325">
+    <index id="102" parent="17" name="IDX_3A3EC4239B6A2325">
       <columns>utilisateurs_adresses_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="101" parent="17" name="PRIMARY">
+    <key id="103" parent="17" name="PRIMARY">
       <columns>utilisateurs_adresses_id
 utilisateurs_id</columns>
       <primary>1</primary>
     </key>
-    <foreign-key id="102" parent="17" name="FK_3A3EC4239B6A2325">
+    <foreign-key id="104" parent="17" name="FK_3A3EC4239B6A2325">
       <columns>utilisateurs_adresses_id</columns>
       <ref-key>~.utilisateurs_adresses.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>delete</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="103" parent="17" name="FK_3A3EC4231E969C5">
+    <foreign-key id="105" parent="17" name="FK_3A3EC4231E969C5">
       <columns>utilisateurs_id</columns>
       <ref-key>~.utilisateurs.PRIMARY</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>

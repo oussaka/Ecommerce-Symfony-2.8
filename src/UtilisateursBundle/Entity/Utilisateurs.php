@@ -34,6 +34,13 @@ class Utilisateurs extends BaseUser
     protected $facebook_id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="profilepicture", type="string", nullable=true)
+     */
+    protected $profilepicture;
+
+    /**
      * @Recaptcha\IsTrue
      */
     public $recaptcha;
@@ -140,5 +147,29 @@ class Utilisateurs extends BaseUser
     public function getFacebookId()
     {
         return $this->facebook_id;
+    }
+
+    /**
+     * Set profilepicture
+     *
+     * @param string $profilepicture
+     *
+     * @return Utilisateurs
+     */
+    public function setProfilepicture($profilepicture)
+    {
+        $this->profilepicture = $profilepicture;
+
+        return $this;
+    }
+
+    /**
+     * Get profilepicture
+     *
+     * @return string
+     */
+    public function getProfilepicture()
+    {
+        return $this->profilepicture;
     }
 }

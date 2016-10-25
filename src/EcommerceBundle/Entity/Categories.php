@@ -73,13 +73,11 @@ class Categories
      * Set image
      *
      * @param \EcommerceBundle\Entity\Media $image
-     *
      * @return Categories
      */
     public function setImage(\EcommerceBundle\Entity\Media $image)
     {
         $this->image = $image;
-
         return $this;
     }
 

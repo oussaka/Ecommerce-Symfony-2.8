@@ -32,12 +32,13 @@ class Utilisateurs extends BaseUser
      * @ORM\Column(name="facebook_id", type="string", nullable=true)
      */
     protected $facebook_id;
+
     /**
      * @var string
      *
-     * @ORM\Column(name="facebook_photo", type="string", nullable=true)
+     * @ORM\Column(name="profilepicture", type="string", nullable=true)
      */
-    protected $facebook_photo;
+    protected $profilepicture;
 
     /**
      * @Recaptcha\IsTrue
