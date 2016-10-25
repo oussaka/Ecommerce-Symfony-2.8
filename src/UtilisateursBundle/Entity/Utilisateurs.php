@@ -5,18 +5,33 @@ namespace UtilisateursBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use EWZ\Bundle\RecaptchaBundle\Validator\Constraints as Recaptcha;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity
  * @ORM\Table(name="utilisateurs")
  */
 class Utilisateurs extends BaseUser
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->media = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->adresses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_id", type="string", nullable=true)
+     */
+    protected $facebook_id;
 
     /**
      * @Recaptcha\IsTrue
@@ -34,16 +49,6 @@ class Utilisateurs extends BaseUser
      * @ORM\JoinColumn(nullable=true)
      */
     private $adresses;
-
-    /**
-     * Utilisateurs constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->commandes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->adresses = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add commande
@@ -111,5 +116,29 @@ class Utilisateurs extends BaseUser
     public function getAdresses()
     {
         return $this->adresses;
+    }
+
+    /**
+     * Set facebookId
+     *
+     * @param string $facebookId
+     *
+     * @return Utilisateurs
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookId
+     *
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
     }
 }

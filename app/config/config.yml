@@ -78,6 +78,29 @@ fos_user:
     registration:
           form:
               type: UtilisateursBundle\Form\RegistrationType
+          confirmation:
+              enabled: true
+
+hwi_oauth:
+    connect:
+        confirmation: true
+    firewall_names: [secured_area]
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebook_id
+    resource_owners:
+        # Facebook Access
+        facebook:
+            type:                facebook
+            client_id:           1801381130132640
+            client_secret:       5f6b7f709b74ae888a8b0c4d579cf696
+            scope:               "email"
+            paths:
+                email:           email
+                profilepicture:  picture.data.url
+    http_client:
+                verify_peer: false
 
 # Captcha
 ewz_recaptcha:
