@@ -29,12 +29,7 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Rechercher un produit">
-                </div>
-                <button type="submit" class="btn btn-default">Go !</button>
-            </form>
+            {% render(controller('EcommerceBundle:Produits:recherche')) %}
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
@@ -69,18 +64,18 @@
 
             <div class="span4">
                 <h4>Notre entrepôt</h4>
-                <p><i class="icon-map-marker"></i>&nbsp;Troyes 10 000 - 9 Rue de Quebec</p>
+                <p><i class="icon-map-marker"></i>&nbsp;{{ ville }} {{ codePostal }} - {{ adresse }}</p>
             </div>
 
             <div class="span2">
                 <h4>Nous contacter</h4>
-                <p><i class="icon-phone"></i>&nbsp;Tel: 06 06 06 06 06</p>
+                <p><i class="icon-phone"></i>&nbsp;Tel: {{ telephone }}</p>
             </div>
         </div>
 
         <div class="row">
             <div class="span4">
-                <p>&copy; Copyright 2016 - Etienne Fontaine</p>
+                <p>&copy; Copyright {{ "now"|date('Y') }} - {{ moi }}</p>
             </div>
         </div>
     </div>

@@ -25,6 +25,8 @@ class CategoriesController extends Controller
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository('EcommerceBundle:Produits')->byCategorie($id);
 
+        if (!$produits){throw $this->createNotFoundException('La page n\'existe pas');}
+
         return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits));
     }
 }

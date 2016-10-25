@@ -4,6 +4,7 @@
         <div class="row">
 
             {% include '@Ecommerce/Front/Default/col-left.html.twig' %}
+            {% if produits|length != 0 %}
             <div class="col-md-9">
 
                 <ul class="thumbnails">
@@ -44,6 +45,10 @@
                         </li>
                     </ul>
                 </nav>
+
+            {% else %}
+                Aucun produit
+            {% endif %}
 
         </div>
     </div>
