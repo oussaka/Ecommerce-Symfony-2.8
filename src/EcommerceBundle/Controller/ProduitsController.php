@@ -12,13 +12,19 @@ class ProduitsController extends Controller
      */
     public function produitsAction()
     {
-        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits'));
+        $em = $this->getDoctrine()->getManager();
+        $produits = $em->getRepository('EcommerceBundle:Produits')->findAll();
+        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits));
     }
+
     /**
-     * @Route("/produit", name="produit")
+     * @Route("/produit/{id}", name="produit")
      */
-    public function presentationProduitAction()
+    public function presentationProduitAction($id)
     {
-        return $this->render('EcommerceBundle:Front/Produits:details.html.twig', array('titre' => 'Produit'));
+        $em = $this->getDoctrine()->getManager();
+        $produit = $em->getRepository('EcommerceBundle:Produits')->find($id);
+        return $this->render('EcommerceBundle:Front/Produits:details.html.twig', array('titre' => 'Produit', 'produit' => $produit));
     }
+
 }
