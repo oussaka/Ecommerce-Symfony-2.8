@@ -9,6 +9,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PanierController extends Controller
 {
+    public function menuAction(Request $request)
+    {
+        // Création de la variable session
+        $session = $request->getSession();
+        if (!$session->has('panier'))
+        {
+            $articles = 0;
+        }else
+        {
+            $articles = count($session->get('panier'));
+        }
+        return $this->render('@Ecommerce/Front/Default/categories/modulesUsed/panier.html.twig', array('articles' => $articles));
+    }
+
     /**
      * @param $id
      * @return RedirectResponse
@@ -36,6 +50,7 @@ class PanierController extends Controller
             {
                 $panier[$id] = $request->query->get('qte');
             }
+            $this->get('session')->getFlashBag()->add('success', 'Quantité modifiée avec succès');
         }else
         {   // si l'article est dans le panier, et que la quantité n'est pas null on change la quantité
             if ($request->query->get('qte') != null)
@@ -47,6 +62,7 @@ class PanierController extends Controller
             {
                 $panier[$id] = 1;
             }
+            $this->get('session')->getFlashBag()->add('success', 'Article ajouté avec succès');
         }
 
         // On remet notre variable intermediaire dans la variable globale SESSION
@@ -68,6 +84,7 @@ class PanierController extends Controller
         {
             unset($panier[$id]);
             $session->set('panier', $panier);
+            $this->get('session')->getFlashBag()->add('success', 'Article supprimé avec succès');
         }
         return $this->redirect($this->generateUrl('panier'));
     }

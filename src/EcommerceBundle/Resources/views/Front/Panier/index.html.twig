@@ -1,10 +1,23 @@
 {% extends ':layout:base.html.twig' %}
+
+{% set totalHT = 0 %}
+{% set totalTTC = 0 %}
+{% set refTva = {} %}
+{% for produit in produits %}
+    {% set refTva = refTva|merge({ ('%'~produit.tva.valeur) : 0 }) %}
+{% endfor %}
+
 {% block body %}
     <div class="container">
         <div class="row">
             {% include '@Ecommerce/Front/Default/col-left.html.twig' %}
             <div class="col-md-9">
                 <h2>Votre parnier</h2>
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
                 {% if produits is empty %}
                     <p>Votre panier est vide</p>
                 {% else %}
@@ -24,17 +37,20 @@
                                 <form action="{{ path('ajouter', { 'id' : produit.id}) }}" method="get">
                                     <td>{{ produit.nom }}</td>
                                     <td>
-                                        <select name="qte" class="span1" onchange="this.form.submit()">
+                                        <select name="qte" class="form-control" onchange="this.form.submit()">
                                             {% for i in 1..10 %}
                                                 <option value="{{ i }}" {% if i == panier[produit.id] %} selected="selected"{% endif %}>{{ i }}</option>
                                             {% endfor %}
                                         </select>
                                         <a href="{{ path('supprimer', { 'id' : produit.id }) }}"><i class="icon-trash"></i></a>
                                     </td>
-                                    <td>{{ produit.prix|horstaxe(produit.tva.multiplicate) }}</td>
-                                    <td>{{ produit.prix * panier[produit.id] }}</td>
+                                    <td>{{ produit.prix }} €</td>
+                                    <td>{{ produit.prix * panier[produit.id] }} €</td>
                                 </form>
                             </tr>
+                            {% set totalHT = totalHT + (produit.prix * panier[produit.id]) %}
+                            {% set totalTTC = totalTTC + (produit.prix * panier[produit.id])|tva(produit.tva.multiplicate) %}
+                            {% set refTva = refTva|merge({ ('%' ~ produit.tva.valeur) : refTva['%' ~ produit.tva.valeur] + (produit.prix * panier[produit.id])|montantTva(produit.tva.multiplicate) }) %}
                         {% endfor %}
 
                         </tbody>
@@ -43,13 +59,15 @@
 
                 <dl class="dl-horizontal pull-right">
                     <dt>Total HT :</dt>
-                    <dd>€</dd>
-
-                    <dt>TVA :</dt>
-                    <dd>200€</dd>
+                    <dd>{{ totalHT }} €</dd>
+                    {% for key, tva in refTva %}
+                        <dt>TVA {{ key }} :</dt>
+                        <dd> {{ tva }} €</dd>
+                    {% endfor %}
+                    <dd></dd>
 
                     <dt>Total:</dt>
-                    <dd>999,99€</dd>
+                    <dd>{{ totalTTC }} €</dd>
                 </dl>
                 <div class="clearfix"></div>
                 <a href="{{ path('livraison') }}" class="btn btn-success pull-right">Valider mon panier</a>

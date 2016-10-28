@@ -3,7 +3,7 @@ services:
       class: EcommerceBundle\Twig\Extension\TvaExtension
       tags:
         - { name: twig.extension }
-    horstaxe:
-      class: EcommerceBundle\Twig\Extension\HorstaxeExtension
+    montantTva:
+      class: EcommerceBundle\Twig\Extension\montantTvaExtension
       tags:
         - { name: twig.extension }

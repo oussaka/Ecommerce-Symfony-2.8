@@ -5,30 +5,52 @@ namespace EcommerceBundle\Controller;
 use EcommerceBundle\Form\RechercheType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class ProduitsController extends Controller
 {
     /**
      * @Route("/", name="homepage")
      */
-    public function produitsAction()
+    public function produitAction(Request $request)
     {
+        $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
+
         $produits = $em->getRepository('EcommerceBundle:Produits')->findBy(array('disponible' => 1));
-        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits));
+        if ($session->has('panier'))
+        {
+            $panier = $session->get('panier');
+        }else
+        {
+            $panier = false;
+        }
+        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits, 'panier' => $panier));
     }
 
     /**
      * @Route("/produit/{id}", name="produit")
      */
-    public function presentationProduitAction($id)
+    public function presentationProduitAction($id, Request $request)
     {
+        $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository('EcommerceBundle:Produits')->find($id);
 
-        if (!$produit){throw $this->createNotFoundException('La page n\'existe pas');}
+        if (!$produit)
+        {
+            throw $this->createNotFoundException('La page n\'existe pas');
+        }
 
-        return $this->render('EcommerceBundle:Front/Produits:details.html.twig', array('titre' => 'Produit', 'produit' => $produit));
+        if ($session->has('panier'))
+        {
+            $panier = $session->get('panier');
+        }else
+        {
+            $panier = false;
+        }
+
+        return $this->render('EcommerceBundle:Front/Produits:details.html.twig', array('titre' => 'Produit', 'produit' => $produit, 'panier' => $panier));
     }
 
     public function rechercheAction()
