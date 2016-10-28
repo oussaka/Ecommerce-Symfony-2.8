@@ -33,4 +33,13 @@ class ProduitsRepository extends EntityRepository
                     ->setParameter('chaine', $chaine);
         return $qb->getQuery()->getResult();
     }
+
+    public function findArray($array)
+    {
+        $qb = $this->createQueryBuilder('u')
+                    ->select('u')
+                    ->where('u.id IN (:array)')
+                    ->setParameter(':array', $array);
+        return $qb->getQuery()->getResult();
+    }
 }

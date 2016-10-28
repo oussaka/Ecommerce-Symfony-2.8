@@ -1,4 +1,5 @@
 {% extends ':layout:base.html.twig' %}
+
 {% block body %}
     <div class="container">
         <div class="row">
@@ -9,14 +10,14 @@
 
                 <ul class="thumbnails">
                     {% for produit in produits %}
-                        <li class="span3">
+                        <li class="col-md-4">
                             <div class="thumbnail">
                                 <img src="{{ produit.image.path }}" alt="DevAndClick" width="300" height="300">
                                 <div class="caption">
                                     <h4>{{ produit.nom }}</h4>
-                                    <p>{{ produit.prix }} €</p>
+                                    <p>{{ produit.prix|tva(produit.tva.multiplicate) }} €</p>
                                     <a class="btn btn-primary" href="{{ path('produit', { 'id' : produit.id }) }}">Plus d'infos</a>
-                                    <a class="btn btn-success" href="{{ path('panier') }}">Ajouter au panier</a>
+                                    <a class="btn btn-success" href="{{ path('ajouter', { 'id' : produit.id }) }}">Ajouter au panier</a>
                                 </div>
                             </div>
                         </li>

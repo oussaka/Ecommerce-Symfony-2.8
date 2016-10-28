@@ -1,4 +1,9 @@
 services:
-#    ecommerce.example:
-#        class: EcommerceBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    tva:
+      class: EcommerceBundle\Twig\Extension\TvaExtension
+      tags:
+        - { name: twig.extension }
+    horstaxe:
+      class: EcommerceBundle\Twig\Extension\HorstaxeExtension
+      tags:
+        - { name: twig.extension }
