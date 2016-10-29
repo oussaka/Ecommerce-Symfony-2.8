@@ -1,73 +1,49 @@
 {% extends ':layout:base.html.twig' %}
+
 {% block body %}
-<div class="container">
+    <div class="container">
     <div class="row">
         <div class="span12">
             <h2>Livraison</h2>
             <div id="collapseOne" class="accordion-body collapse in">
                 <div class="accordion-inner">
-                    <div class="col-md-4">
-                        <form action="{{ path('validation') }}">
-                            <h4>Adresse de livraison</h4>
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                3b rue jules paulo, 75 000 Paris <a href="#"><i class="icon-trash"></i></a>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                4b rue jules paulo, 75 000 Paris <a href="#"><i class="icon-trash"></i></a>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                5b rue jules paulo, 75 000 Paris <a href="#"><i class="icon-trash"></i></a>
-                            </label>
+                    <div class="span4">
+                        {% if utilisateur.adresses|length != 0 %}
+                            <form action="{{ path('validation') }}" method="POST">
 
-                            <br /><br />
+                                <h4>Adresse de livraison</h4>
+                                {% for adresse in utilisateur.adresses %}
+                                    <label class="radio">
+                                        <input type="radio" name="livraison" value="{{ adresse.id }}" {% if loop.index0 == 0 %}checked="checked"{% endif %}>
+                                        {{ adresse.adresse }}, {{ adresse.cp }} {{ adresse.ville }} - {{ adresse.pays }} <a href="{{ path('livraisonAdresseSuppression', { 'id' : adresse.id }) }}"><i class="icon-trash"></i></a>
+                                        <br />{{ adresse.prenom }} {{ adresse.nom }}
+                                    </label>
+                                {% endfor %}
 
-                            <h4>Adresse de facturation</h4>
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios2" id="optionsRadios1" value="option1" checked="">
-                                3b rue jules paulo, 75 000 Paris <a href="#"><i class="icon-trash"></i></a>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios2" id="optionsRadios1" value="option1" checked="">
-                                4b rue jules paulo, 75 000 Paris <a href="#"><i class="icon-trash"></i></a>
-                            </label>
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios2" id="optionsRadios1" value="option1" checked="">
-                                5b rue jules paulo, 75 000 Paris <a href="#"><i class="icon-trash"></i></a>
-                            </label>
-                            <button class="btn btn-primary">Valider mon adresse de livraison</button>
-                        </form>
+                                <br /><br />
+
+                                <h4>Adresse de facturation</h4>
+                                {% for adresse in utilisateur.adresses %}
+                                    <label class="radio">
+                                        <input type="radio" name="facturation" value="{{ adresse.id }}" {% if loop.index0 == 0 %}checked="checked"{% endif %}>
+                                        {{ adresse.adresse }}, {{ adresse.cp }} {{ adresse.ville }} - {{ adresse.pays }} <a href="{{ path('livraisonAdresseSuppression', { 'id' : adresse.id }) }}"><i class="icon-trash"></i></a>
+                                        <br />{{ adresse.prenom }} {{ adresse.nom }}
+                                    </label>
+                                {% endfor %}
+
+                                <br />
+
+                                <button class="btn btn-primary">Valider mes adresses</button>
+                            </form>
+                        {% endif %}
                     </div>
 
 
-                    <div class="col-md-4 col-md-offset-2">
+                    <div class="span4 offset2">
                         <h4>Ajouter une nouvelle adresse</h4>
-                        <form>
-                            <label>Nom</label>
-                            <input class="form-control" type="text">
-
-                            <label>Prénom</label>
-                            <input class="form-control" type="text">
-
-                            <label>Adresse</label>
-                            <input class="form-control" type="text">
-
-                            <label>Ville</label>
-                            <input class="form-control" type="text">
-
-                            <label>Code postal</label>
-                            <input class="form-control" type="text">
-
-                            <label>Ville</label>
-                            <input class="form-control" type="text">
-
-                            <label>Téléphone</label>
-                            <input class="form-control" type="text">
-
-                            <br />
-                            <button class="btn btn-primary btn-block">Ajouter</button>
+                        <form action="{{ path('livraison') }}" method="POST">
+                            {{ form_widget(form) }}
+                            <button class="btn btn-primary" type="submit">Ajouter</button>
                         </form>
                     </div>
                 </div>
@@ -75,5 +51,4 @@
 
         </div>
     </div>
-
 {% endblock %}

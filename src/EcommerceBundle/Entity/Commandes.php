@@ -22,7 +22,7 @@ class Commandes
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="UtilisateursBundle\Entity\Utilisateurs", inversedBy="commandes")
+     * @ORM\ManyToOne(targetEntity="UtilisateursBundle\Entity\Utilisateurs", inversedBy="commandes")
      * @ORM\JoinColumn(nullable=true)
      */
     private $utilisateur;
@@ -49,9 +49,9 @@ class Commandes
     private $reference;
 
     /**
-     * @var string
+     * @var array
      *
-     * @ORM\Column(name="produits", type="string", length=255)
+     * @ORM\Column(name="produits", type="array")
      */
     private $produits;
 
@@ -141,7 +141,7 @@ class Commandes
     /**
      * Set produits
      *
-     * @param string $produits
+     * @param array $produits
      *
      * @return Commandes
      */
@@ -155,42 +155,21 @@ class Commandes
     /**
      * Get produits
      *
-     * @return string
+     * @return array
      */
     public function getProduits()
     {
         return $this->produits;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add utilisateur
-     *
-     * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
-     *
+     * Set utilisateur
      * @return Commandes
      */
-    public function addUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
+    public function setUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur = null)
     {
-        $this->utilisateur[] = $utilisateur;
-
+        $this->utilisateur = $utilisateur;
         return $this;
-    }
-
-    /**
-     * Remove utilisateur
-     *
-     * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
-     */
-    public function removeUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
-    {
-        $this->utilisateur->removeElement($utilisateur);
     }
 
     /**

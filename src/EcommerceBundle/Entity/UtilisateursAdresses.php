@@ -22,7 +22,7 @@ class UtilisateursAdresses
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="UtilisateursBundle\Entity\Utilisateurs", inversedBy="adresses")
+     * @ORM\ManyToOne(targetEntity="UtilisateursBundle\Entity\Utilisateurs", inversedBy="adresses")
      * @ORM\JoinColumn(nullable=true)
      */
     private $utilisateur;
@@ -30,14 +30,14 @@ class UtilisateursAdresses
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=45)
+     * @ORM\Column(name="nom", type="string", length=125)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=45)
+     * @ORM\Column(name="prenom", type="string", length=125)
      */
     private $prenom;
 
@@ -58,36 +58,38 @@ class UtilisateursAdresses
     /**
      * @var string
      *
-     * @ORM\Column(name="cp", type="string", length=255)
+     * @ORM\Column(name="cp", type="string", length=10)
      */
     private $cp;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=255)
+     * @ORM\Column(name="pays", type="string", length=50)
      */
     private $pays;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=100)
      */
     private $ville;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="complement", type="string", length=255)
+     * @ORM\Column(name="complement", type="string", length=255, nullable=true)
      */
     private $complement;
+
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -285,42 +287,25 @@ class UtilisateursAdresses
     {
         return $this->complement;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->utilisateur = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
-     * Add utilisateur
+     * Set utilisateur
      *
      * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
      *
      * @return UtilisateursAdresses
      */
-    public function addUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
+    public function setUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur = null)
     {
-        $this->utilisateur[] = $utilisateur;
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }
 
     /**
-     * Remove utilisateur
-     *
-     * @param \UtilisateursBundle\Entity\Utilisateurs $utilisateur
-     */
-    public function removeUtilisateur(\UtilisateursBundle\Entity\Utilisateurs $utilisateur)
-    {
-        $this->utilisateur->removeElement($utilisateur);
-    }
-
-    /**
      * Get utilisateur
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \UtilisateursBundle\Entity\Utilisateurs
      */
     public function getUtilisateur()
     {

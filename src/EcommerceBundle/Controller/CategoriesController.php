@@ -5,6 +5,7 @@ namespace EcommerceBundle\Controller;
 use EcommerceBundle\EcommerceBundle;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class CategoriesController extends Controller
 {
@@ -20,13 +21,22 @@ class CategoriesController extends Controller
     /**
      * @Route("/categorie/{id}", name="categorie")
      */
-    public function categoriesAction($id)
+    public function categoriesAction($id, Request $request)
     {
+        $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
+
         $produits = $em->getRepository('EcommerceBundle:Produits')->byCategorie($id);
 
         if (!$produits){throw $this->createNotFoundException('La page n\'existe pas');}
 
-        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits));
+        if ($session->has('panier'))
+        {
+            $panier = $session->get('panier');
+        }else
+        {
+            $panier = false;
+        }
+        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits, 'panier' => $panier));
     }
 }

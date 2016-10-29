@@ -29,23 +29,24 @@
                             <th>Quantité</th>
                             <th>Prix unitaire</th>
                             <th>Total HT</th>
+                            <th>Supprimer</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% for produit in produits %}
                             <tr>
-                                <form action="{{ path('ajouter', { 'id' : produit.id}) }}" method="get">
+                                <form action="{{ path('ajouter', { 'id' : produit.id }) }}" method="GET">
                                     <td>{{ produit.nom }}</td>
                                     <td>
-                                        <select name="qte" class="form-control" onchange="this.form.submit()">
+                                        <select name="qte" class="form-control" onChange="this.form.submit()">
                                             {% for i in 1..10 %}
                                                 <option value="{{ i }}" {% if i == panier[produit.id] %} selected="selected"{% endif %}>{{ i }}</option>
                                             {% endfor %}
                                         </select>
-                                        <a href="{{ path('supprimer', { 'id' : produit.id }) }}"><i class="icon-trash"></i></a>
                                     </td>
                                     <td>{{ produit.prix }} €</td>
                                     <td>{{ produit.prix * panier[produit.id] }} €</td>
+                                    <td><a href="{{ path('supprimer', { 'id' : produit.id }) }}"><i class="icon-trash"></i></a></td>
                                 </form>
                             </tr>
                             {% set totalHT = totalHT + (produit.prix * panier[produit.id]) %}

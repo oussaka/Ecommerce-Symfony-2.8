@@ -39,7 +39,7 @@ class Utilisateurs extends BaseUser
     public $recaptcha;
 
     /**
-     * @ORM\OneToMany(targetEntity="EcommerceBundle\Entity\Commandes", mappedBy="utilisateur", cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="EcommerceBundle\Entity\Commandes", mappedBy="utilisateur", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $commandes;
@@ -85,27 +85,27 @@ class Utilisateurs extends BaseUser
     }
 
     /**
-     * Add adress
+     * Add adresses
      *
      * @param \EcommerceBundle\Entity\UtilisateursAdresses $adress
      *
      * @return Utilisateurs
      */
-    public function addAdress(\EcommerceBundle\Entity\UtilisateursAdresses $adress)
+    public function addAdress(\EcommerceBundle\Entity\UtilisateursAdresses $adresses)
     {
-        $this->adresses[] = $adress;
+        $this->adresses[] = $adresses;
 
         return $this;
     }
 
     /**
-     * Remove adress
+     * Remove adresses
      *
-     * @param \EcommerceBundle\Entity\UtilisateursAdresses $adress
+     * @param \EcommerceBundle\Entity\UtilisateursAdresses $adresses
      */
-    public function removeAdress(\EcommerceBundle\Entity\UtilisateursAdresses $adress)
+    public function removeAdress(\EcommerceBundle\Entity\UtilisateursAdresses $adresses)
     {
-        $this->adresses->removeElement($adress);
+        $this->adresses->removeElement($adresses);
     }
 
     /**
