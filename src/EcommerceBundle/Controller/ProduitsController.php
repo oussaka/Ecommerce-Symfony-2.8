@@ -17,7 +17,7 @@ class ProduitsController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
 
-        $produits = $em->getRepository('EcommerceBundle:Produits')->findBy(array('disponible' => 1));
+        $findProduits = $em->getRepository('EcommerceBundle:Produits')->findBy(array('disponible' => 1));
         if ($session->has('panier'))
         {
             $panier = $session->get('panier');
@@ -25,6 +25,9 @@ class ProduitsController extends Controller
         {
             $panier = false;
         }
+
+        $produits  = $this->get('knp_paginator')->paginate($findProduits,$request->query->get('page', 1)/*page number*/,4/*limit per page*/);
+
         return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits, 'panier' => $panier));
     }
 

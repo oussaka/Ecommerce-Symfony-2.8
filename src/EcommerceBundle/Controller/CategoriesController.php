@@ -26,9 +26,9 @@ class CategoriesController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getManager();
 
-        $produits = $em->getRepository('EcommerceBundle:Produits')->byCategorie($id);
+        $findProduits = $em->getRepository('EcommerceBundle:Produits')->byCategorie($id);
 
-        if (!$produits){throw $this->createNotFoundException('La page n\'existe pas');}
+        if (!$findProduits){throw $this->createNotFoundException('La page n\'existe pas');}
 
         if ($session->has('panier'))
         {
@@ -37,6 +37,9 @@ class CategoriesController extends Controller
         {
             $panier = false;
         }
+
+        $produits  = $this->get('knp_paginator')->paginate($findProduits,$request->query->get('page', 1)/*page number*/,4/*limit per page*/);
+
         return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits, 'panier' => $panier));
     }
 }
