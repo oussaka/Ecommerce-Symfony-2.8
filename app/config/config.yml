@@ -80,6 +80,9 @@ fos_user:
               type: UtilisateursBundle\Form\RegistrationType
           confirmation:
               enabled: true
+    from_email:
+        address: "%mailer_address%"
+        sender_name: "%mailer_user%"
 
 hwi_oauth:
     connect:
