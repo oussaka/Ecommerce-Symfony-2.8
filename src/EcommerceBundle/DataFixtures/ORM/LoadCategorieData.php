@@ -5,11 +5,14 @@
  * Date: 25/10/2016
  * Time: 15:50
  */
+
 namespace EcommerceBundle\DataFixtures;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use EcommerceBundle\Entity\Categories;
+
 class LoadCategorieData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -26,6 +29,7 @@ class LoadCategorieData extends AbstractFixture implements OrderedFixtureInterfa
         $this->addReference('categorie1', $categorie1);
         $this->addReference('categorie2', $categorie2);
     }
+
     public function getOrder()
     {
         return 2;

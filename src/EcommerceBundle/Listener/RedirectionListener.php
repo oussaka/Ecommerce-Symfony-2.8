@@ -5,11 +5,12 @@
  * Date: 29/10/2016
  * Time: 22:50
  */
+
 namespace EcommerceBundle\Listener;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\getResponseEvent;
 
 class RedirectionListener
@@ -25,18 +26,14 @@ class RedirectionListener
     {
         $route = $event->getRequest()->attributes->get('_route');
 
-        if ($route == 'livraison' || $route == 'validation')
-        {
-            if ($this->session->has('panier'))
-            {
-                if (count($this->session->get('panier')) == 0)
-                {
+        if ($route == 'livraison' || $route == 'validation') {
+            if ($this->session->has('panier')) {
+                if (count($this->session->get('panier')) == 0) {
                     $event->setResponse(new RedirectResponse($this->router->generate('panier')));
                 }
             }
 
-            if (!is_object($this->securityContext->getToken()->getUser()))
-            {
+            if (!is_object($this->securityContext->getToken()->getUser())) {
                 $this->session->getFlashBag()->add('notification', 'Vous devez vous identifier');
                 $event->setResponse(new RedirectResponse($this->router->generate('fos_user_security_login')));
             }

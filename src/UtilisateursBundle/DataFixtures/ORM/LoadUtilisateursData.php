@@ -1,19 +1,24 @@
 <?php
+
 namespace UtilisateursBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use UtilisateursBundle\Entity\Utilisateurs;
+
 class UtilisateursData extends AbstractFixture implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     private $container;
+
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
+
     public function load(ObjectManager $manager)
     {
         $utilisateur1 = new Utilisateurs();
@@ -53,6 +58,7 @@ class UtilisateursData extends AbstractFixture implements FixtureInterface, Cont
         $this->addReference('utilisateur4', $utilisateur4);
         $this->addReference('utilisateur5', $utilisateur5);
     }
+
     public function getOrder()
     {
         return 5;

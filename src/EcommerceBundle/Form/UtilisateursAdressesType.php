@@ -22,9 +22,9 @@ class UtilisateursAdressesType extends AbstractType
             ->add('cp')
             ->add('pays')
             ->add('ville')
-            ->add('complement',null,array('required' => false));
+            ->add('complement', null, array('required' => false));
     }
-    
+
     /**
      * {@inheritdoc}
      */

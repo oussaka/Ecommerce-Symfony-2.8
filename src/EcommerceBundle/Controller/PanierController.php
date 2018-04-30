@@ -2,8 +2,8 @@
 
 namespace EcommerceBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -13,11 +13,9 @@ class PanierController extends Controller
     {
         // Création de la variable session
         $session = $request->getSession();
-        if (!$session->has('panier'))
-        {
+        if (!$session->has('panier')) {
             $articles = 0;
-        }else
-        {
+        } else {
             $articles = count($session->get('panier'));
         }
         return $this->render('@Ecommerce/Front/Default/categories/modulesUsed/panier.html.twig', array('articles' => $articles));
@@ -34,8 +32,7 @@ class PanierController extends Controller
         $session = $request->getSession();
 
         // On test si la session panier existe
-        if (!$session->has('panier'))
-        {
+        if (!$session->has('panier')) {
             $session->set('panier', array());
         }
 
@@ -43,23 +40,17 @@ class PanierController extends Controller
         $panier = $session->get('panier');
 
         // On test si l'article est dans le panier
-        if (array_key_exists($id, $panier))
-        {
+        if (array_key_exists($id, $panier)) {
             // Si la quantitée n'est pas nulle on change la quantité
-            if ($request->query->get('qte') != null)
-            {
+            if ($request->query->get('qte') != null) {
                 $panier[$id] = $request->query->get('qte');
             }
             $this->get('session')->getFlashBag()->add('success', 'Quantité modifiée avec succès');
-        }else
-        {   // si l'article est dans le panier, et que la quantité n'est pas null on change la quantité
-            if ($request->query->get('qte') != null)
-            {
+        } else {   // si l'article est dans le panier, et que la quantité n'est pas null on change la quantité
+            if ($request->query->get('qte') != null) {
                 $panier[$id] = $request->query->get('qte');
-            }
-            // Sinon on défini la quntité à 1
-            else
-            {
+            } // Sinon on défini la quntité à 1
+            else {
                 $panier[$id] = 1;
             }
             $this->get('session')->getFlashBag()->add('success', 'Article ajouté avec succès');
@@ -80,8 +71,7 @@ class PanierController extends Controller
     {
         $session = $request->getSession();
         $panier = $session->get('panier');
-        if (array_key_exists($id, $panier))
-        {
+        if (array_key_exists($id, $panier)) {
             unset($panier[$id]);
             $session->set('panier', $panier);
             $this->get('session')->getFlashBag()->add('success', 'Article supprimé avec succès');
@@ -96,15 +86,14 @@ class PanierController extends Controller
     {
         $session = $this->getRequest()->getSession();
 
-        if (!$session->has('panier'))
-        {
+        if (!$session->has('panier')) {
             $session->set('panier', array());
         }
 
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository('EcommerceBundle:Produits')->findArray(array_keys($session->get('panier')));
         return $this->render('EcommerceBundle:Front/Panier:index.html.twig', array('titre' => 'Panier',
-                                                                    'produits' => $produits,
-                                                                    'panier' => $session->get('panier')));
+            'produits' => $produits,
+            'panier' => $session->get('panier')));
     }
 }

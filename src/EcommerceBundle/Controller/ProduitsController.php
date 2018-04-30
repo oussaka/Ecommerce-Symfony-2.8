@@ -3,8 +3,8 @@
 namespace EcommerceBundle\Controller;
 
 use EcommerceBundle\Form\RechercheType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProduitsController extends Controller
@@ -18,15 +18,13 @@ class ProduitsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $findProduits = $em->getRepository('EcommerceBundle:Produits')->findBy(array('disponible' => 1));
-        if ($session->has('panier'))
-        {
+        if ($session->has('panier')) {
             $panier = $session->get('panier');
-        }else
-        {
+        } else {
             $panier = false;
         }
 
-        $produits  = $this->get('knp_paginator')->paginate($findProduits,$request->query->get('page', 1)/*page number*/,4/*limit per page*/);
+        $produits = $this->get('knp_paginator')->paginate($findProduits, $request->query->get('page', 1)/*page number*/, 4/*limit per page*/);
 
         return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits, 'panier' => $panier));
     }
@@ -40,16 +38,13 @@ class ProduitsController extends Controller
         $em = $this->getDoctrine()->getManager();
         $produit = $em->getRepository('EcommerceBundle:Produits')->find($id);
 
-        if (!$produit)
-        {
+        if (!$produit) {
             throw $this->createNotFoundException('La page n\'existe pas');
         }
 
-        if ($session->has('panier'))
-        {
+        if ($session->has('panier')) {
             $panier = $session->get('panier');
-        }else
-        {
+        } else {
             $panier = false;
         }
 
@@ -71,8 +66,7 @@ class ProduitsController extends Controller
     public function rechercheTraitementAction(Request $request)
     {
         $form = $this->createForm(new RechercheType());
-        if ($this->get('request')->getMethod() == 'POST')
-        {
+        if ($this->get('request')->getMethod() == 'POST') {
             $form->bind($this->get('request'));
             $chaine = $form['recherche']->getData();
             $em = $this->getDoctrine()->getManager();
@@ -83,7 +77,7 @@ class ProduitsController extends Controller
                 $request->query->get('page', 1)/*page number*/,
                 10/*limit per page*/
             );
-        }else{
+        } else {
             throw $this->createNotFoundException('La page n\'existe pas');
         }
         return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('produits' => $produitsParPage));

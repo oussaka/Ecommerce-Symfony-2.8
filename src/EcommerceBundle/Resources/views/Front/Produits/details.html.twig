@@ -22,16 +22,16 @@
                         <p>{{ produit.description }}</p>
                         <h4>{{ produit.prix|tva(produit.tva.multiplicate) }}€</h4>
                         {% if panier[produit.id] is not defined %}
-                        <form action="{{ path('ajouter', { 'id' : produit.id }) }}" method="get">
-                            <select name="qte" class="span1 form-control">
-                                {% for i in 1..10 %}
-                                    <option value="{{ i }}">{{ i }}</option>
-                                {% endfor %}
-                            </select><br>
-                            <div>
-                                <button class="btn btn-primary">Ajouter au panier</button>
-                            </div>
-                        </form>
+                            <form action="{{ path('ajouter', { 'id' : produit.id }) }}" method="get">
+                                <select name="qte" class="span1 form-control">
+                                    {% for i in 1..10 %}
+                                        <option value="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                </select><br>
+                                <div>
+                                    <button class="btn btn-primary">Ajouter au panier</button>
+                                </div>
+                            </form>
                         {% else %}
                             <a href="{{ path('panier') }}" class="btn btn-primary">Produit déjà dans le panier</a>
                         {% endif %}

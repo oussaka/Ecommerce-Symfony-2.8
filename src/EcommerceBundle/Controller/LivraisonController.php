@@ -9,9 +9,9 @@
 namespace EcommerceBundle\Controller;
 
 use EcommerceBundle\Entity\UtilisateursAdresses;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use EcommerceBundle\Form\UtilisateursAdressesType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class LivraisonController extends Controller
@@ -25,11 +25,9 @@ class LivraisonController extends Controller
         $entity = new UtilisateursAdresses();
         $form = $this->createForm(new UtilisateursAdressesType(), $entity);
 
-        if ($this->get('request')->getMethod() == 'POST')
-        {
+        if ($this->get('request')->getMethod() == 'POST') {
             $form->handleRequest($request);
-            if ($form->isValid())
-            {
+            if ($form->isValid()) {
                 $em = $this->getDoctrine()->getManager();
                 $entity->setUtilisateur($utilisateur);
                 $em->persist($entity);
@@ -41,7 +39,7 @@ class LivraisonController extends Controller
             }
         }
 
-        return $this->render('EcommerceBundle:Front/Livraison:index.html.twig', array('titre' => 'Livraison','utilisateur' => $utilisateur ,'form' => $form->createView()));
+        return $this->render('EcommerceBundle:Front/Livraison:index.html.twig', array('titre' => 'Livraison', 'utilisateur' => $utilisateur, 'form' => $form->createView()));
     }
 
     /**
@@ -54,14 +52,13 @@ class LivraisonController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entity = $em->getRepository('EcommerceBundle:UtilisateursAdresses')->find($id);
 
-        if ($this->getUser() != $entity->getUtilisateur() || !$entity)
-        {
+        if ($this->getUser() != $entity->getUtilisateur() || !$entity) {
             return $this->generateUrl('livraison');
         }
         $em->remove($entity);
         $em->flush();
         $this->get('session')->getFlashBag()->add('success', 'Votre adresse a bien été supprimée');
-        return $this->redirect ($this->generateUrl ('livraison'));
+        return $this->redirect($this->generateUrl('livraison'));
     }
 
     public function setLivraisonOnSession(Request $request)
@@ -71,12 +68,10 @@ class LivraisonController extends Controller
         if (!$session->has('adresse')) $session->set('adresse', array());
         $adresse = $session->get('adresse');
 
-        if ($request->request->get('livraison') != null && $request->request->get('facturation'))
-        {
+        if ($request->request->get('livraison') != null && $request->request->get('facturation')) {
             $adresse['livraison'] = $request->request->get('livraison');
             $adresse['facturation'] = $request->request->get('facturation');
-        }else
-        {
+        } else {
             return $this->redirect($this->generateUrl('validation'));
         }
         $session->set('adresse', $adresse);
@@ -88,8 +83,7 @@ class LivraisonController extends Controller
      */
     public function validationAction(Request $request)
     {
-        if ($this->get('request')->getMethod() == 'POST')
-        {
+        if ($this->get('request')->getMethod() == 'POST') {
             $this->setLivraisonOnSession($request);
         }
 
@@ -102,10 +96,10 @@ class LivraisonController extends Controller
         $facturation = $em->getRepository('EcommerceBundle:UtilisateursAdresses')->find($adresse['facturation']);
 
         return $this->render('EcommerceBundle:Front/Livraison:validation.html.twig', array('titre' => 'Validation',
-                                                                            'produits' => $produits,
-                                                                            'livraison' => $livraison,
-                                                                            'facturation' => $facturation,
-                                                                            'panier' => $session->get('panier')));
+            'produits' => $produits,
+            'livraison' => $livraison,
+            'facturation' => $facturation,
+            'panier' => $session->get('panier')));
     }
 
 }

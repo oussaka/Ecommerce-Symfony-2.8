@@ -1,7 +1,7 @@
 {% extends ':layout:base.html.twig' %}
 {% block body %}
-<h1>{{ titre }}</h1>
+    <h1>{{ titre }}</h1>
     {% for produit in produits %}
         {{ produit.nom }}
-        {% endfor %}
+    {% endfor %}
 {% endblock %}

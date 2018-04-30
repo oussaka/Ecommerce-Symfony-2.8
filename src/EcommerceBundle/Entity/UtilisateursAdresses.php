@@ -84,8 +84,6 @@ class UtilisateursAdresses
     private $complement;
 
 
-
-
     /**
      * Get id
      *

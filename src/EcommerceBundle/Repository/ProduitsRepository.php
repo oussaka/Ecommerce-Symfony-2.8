@@ -14,32 +14,32 @@ class ProduitsRepository extends EntityRepository
 {
     public function byCategorie($categorie)
     {
-        $qb =  $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->where('u.categories = :categorie')
-                    ->andWhere('u.disponible = 1')
-                    ->orderBy('u.id')
-                    ->setParameter('categorie', $categorie);
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.categories = :categorie')
+            ->andWhere('u.disponible = 1')
+            ->orderBy('u.id')
+            ->setParameter('categorie', $categorie);
         return $qb->getQuery()->getResult();
     }
 
     public function recherche($chaine)
     {
-        $qb =  $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->where('u.nom like :chaine')
-                    ->andWhere('u.disponible = 1')
-                    ->orderBy('u.id')
-                    ->setParameter('chaine', $chaine);
+        $qb = $this->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.nom like :chaine')
+            ->andWhere('u.disponible = 1')
+            ->orderBy('u.id')
+            ->setParameter('chaine', $chaine);
         return $qb->getQuery()->getResult();
     }
 
     public function findArray($array)
     {
         $qb = $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->where('u.id IN (:array)')
-                    ->setParameter(':array', $array);
+            ->select('u')
+            ->where('u.id IN (:array)')
+            ->setParameter(':array', $array);
         return $qb->getQuery()->getResult();
     }
 }

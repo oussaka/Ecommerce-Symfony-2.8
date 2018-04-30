@@ -11,18 +11,14 @@
 
 namespace UtilisateursBundle\Controller;
 
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use HWI\Bundle\OAuthBundle\Security\Core\Exception\AccountNotLinkedException;
 use Symfony\Component\DependencyInjection\ContainerAware;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
@@ -32,7 +28,7 @@ class ConnectController extends ContainerAware
     protected function getResourceOwnerByName($name)
     {
         foreach ($this->container->getParameter('hwi_oauth.firewall_names') as $firewall) {
-            $id = 'hwi_oauth.resource_ownermap.'.$firewall;
+            $id = 'hwi_oauth.resource_ownermap.' . $firewall;
             if (!$this->container->has($id)) {
                 continue;
             }
@@ -40,7 +36,8 @@ class ConnectController extends ContainerAware
             if ($resourceOwner = $ownerMap->getResourceOwnerByName($name)) {
                 return $resourceOwner;
             }
-        }throw new \RuntimeException(sprintf("No resource owner with name '%s'.", $name));
+        }
+        throw new \RuntimeException(sprintf("No resource owner with name '%s'.", $name));
     }
 
     public function registrationAction(Request $request, $key)
@@ -56,8 +53,8 @@ class ConnectController extends ContainerAware
         }
 
         $session = $request->getSession();
-        $error = $session->get('_hwi_oauth.registration_error.'.$key);
-        $session->remove('_hwi_oauth.registration_error.'.$key);
+        $error = $session->get('_hwi_oauth.registration_error.' . $key);
+        $session->remove('_hwi_oauth.registration_error.' . $key);
 
         if (!($error instanceof AccountNotLinkedException) || (time() - $key > 300)) {
             throw new \Exception('Cannot register an account.');
@@ -65,8 +62,7 @@ class ConnectController extends ContainerAware
 
         $userInformation = $this
             ->getResourceOwnerByName($error->getResourceOwnerName())
-            ->getUserInformation($error->getRawToken())
-        ;
+            ->getUserInformation($error->getRawToken());
 
         // enable compatibility with FOSUserBundle 1.3.x and 2.x
         if (interface_exists('FOS\UserBundle\Form\Factory\FactoryInterface')) {
@@ -111,7 +107,7 @@ class ConnectController extends ContainerAware
 
         // reset the error in the session
         $key = time();
-        $session->set('_hwi_oauth.registration_error.'.$key, $error);
+        $session->set('_hwi_oauth.registration_error.' . $key, $error);
 
         return $this->container->get('templating')->renderResponse('HWIOAuthBundle:Connect:registration.html.' . $this->getTemplatingEngine(), array(
             'key' => $key,
@@ -119,14 +115,15 @@ class ConnectController extends ContainerAware
             'userInformation' => $userInformation,
         ));
     }
+
     /**
      * Authenticate a user with Symfony Security.
      *
-     * @param Request       $request
+     * @param Request $request
      * @param UserInterface $user
-     * @param string        $resourceOwnerName
-     * @param string        $accessToken
-     * @param bool          $fakeLogin
+     * @param string $resourceOwnerName
+     * @param string $accessToken
+     * @param bool $fakeLogin
      */
     protected function authenticateUser(Request $request, UserInterface $user, $resourceOwnerName, $accessToken, $fakeLogin = true)
     {
@@ -174,7 +171,8 @@ class ConnectController extends ContainerAware
         return $this->container->getParameter('hwi_oauth.templating.engine');
     }
 
-    public function handleFacebookResponse($response, $user) {
+    public function handleFacebookResponse($response, $user)
+    {
         // User is from Facebook : DO STUFF HERE \o/
         // All data from Facebook
         $data = $response->getResponse();

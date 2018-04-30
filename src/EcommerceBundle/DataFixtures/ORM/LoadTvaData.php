@@ -1,9 +1,12 @@
 <?php
+
 namespace EcommerceBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use EcommerceBundle\Entity\Tva;
+
 class LoadTvaData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -22,6 +25,7 @@ class LoadTvaData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('tva1', $tva1);
         $this->addReference('tva2', $tva2);
     }
+
     public function getOrder()
     {
         return 3;

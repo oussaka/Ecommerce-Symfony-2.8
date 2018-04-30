@@ -2,9 +2,9 @@
 
 namespace UtilisateursBundle\Form;
 
+use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use EWZ\Bundle\RecaptchaBundle\Form\Type\EWZRecaptchaType;
 
 class RegistrationType extends AbstractType
 {

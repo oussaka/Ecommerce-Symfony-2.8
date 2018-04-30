@@ -5,11 +5,14 @@
  * Date: 25/10/2016
  * Time: 16:15
  */
+
 namespace EcommerceBundle\DataFixtures;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use EcommerceBundle\Entity\Produits;
+
 class LoadProduitsData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -70,6 +73,7 @@ class LoadProduitsData extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($produit6);
         $manager->flush();
     }
+
     public function getOrder()
     {
         return 4;

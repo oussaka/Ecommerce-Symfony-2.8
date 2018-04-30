@@ -2,9 +2,8 @@
 
 namespace EcommerceBundle\Controller;
 
-use EcommerceBundle\EcommerceBundle;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoriesController extends Controller
@@ -28,17 +27,17 @@ class CategoriesController extends Controller
 
         $findProduits = $em->getRepository('EcommerceBundle:Produits')->byCategorie($id);
 
-        if (!$findProduits){throw $this->createNotFoundException('La page n\'existe pas');}
+        if (!$findProduits) {
+            throw $this->createNotFoundException('La page n\'existe pas');
+        }
 
-        if ($session->has('panier'))
-        {
+        if ($session->has('panier')) {
             $panier = $session->get('panier');
-        }else
-        {
+        } else {
             $panier = false;
         }
 
-        $produits  = $this->get('knp_paginator')->paginate($findProduits,$request->query->get('page', 1)/*page number*/,4/*limit per page*/);
+        $produits = $this->get('knp_paginator')->paginate($findProduits, $request->query->get('page', 1)/*page number*/, 4/*limit per page*/);
 
         return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('titre' => 'Produits', 'produits' => $produits, 'panier' => $panier));
     }

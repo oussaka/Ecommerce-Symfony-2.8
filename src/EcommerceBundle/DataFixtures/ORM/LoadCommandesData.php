@@ -1,9 +1,12 @@
 <?php
+
 namespace EcommerceBundle\DataFixtures\ORM;
+
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use EcommerceBundle\Entity\Commandes;
+
 class LoadCommandesData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -30,6 +33,7 @@ class LoadCommandesData extends AbstractFixture implements OrderedFixtureInterfa
         $manager->persist($commande2);
         $manager->flush();
     }
+
     public function getOrder()
     {
         return 7;
