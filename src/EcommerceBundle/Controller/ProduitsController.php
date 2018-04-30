@@ -64,8 +64,11 @@ class ProduitsController extends Controller
 
     /**
      * @Route("/recherche", name="recherche")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function rechercheTraitementAction()
+    public function rechercheTraitementAction(Request $request)
     {
         $form = $this->createForm(new RechercheType());
         if ($this->get('request')->getMethod() == 'POST')
@@ -74,9 +77,15 @@ class ProduitsController extends Controller
             $chaine = $form['recherche']->getData();
             $em = $this->getDoctrine()->getManager();
             $produit = $em->getRepository('EcommerceBundle:Produits')->recherche($chaine);
+
+            $produitsParPage = $this->get('knp_paginator')->paginate(
+                $produit,
+                $request->query->get('page', 1)/*page number*/,
+                10/*limit per page*/
+            );
         }else{
             throw $this->createNotFoundException('La page n\'existe pas');
         }
-        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('produits' => $produit));
+        return $this->render('EcommerceBundle:Front/Produits:index.html.twig', array('produits' => $produitsParPage));
     }
 }

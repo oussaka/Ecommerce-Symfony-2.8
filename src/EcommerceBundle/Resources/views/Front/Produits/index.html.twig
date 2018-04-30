@@ -6,33 +6,41 @@
 
             {% include '@Ecommerce/Front/Default/col-left.html.twig' %}
             {% if produits|length != 0 %}
-            <div class="col-md-9">
+                <div class="col-md-9">
 
-                <ul class="thumbnails">
-                    {% for produit in produits %}
-                        <li class="col-md-5">
-                            <div class="thumbnail">
-                                <img src="{{ produit.image.path }}" alt="DevAndClick" width="470" height="310">
-                                <div class="caption">
-                                    <h4>{{ produit.nom }}</h4>
-                                    <p>{{ produit.prix|tva(produit.tva.multiplicate) }} €</p>
-                                    <a class="btn btn-primary" href="{{ path('produit', { 'id' : produit.id }) }}">Plus d'infos</a>
-                                    {% if panier[produit.id] is not defined %}
-                                        <a class="btn btn-success" href="{{ path('ajouter', { 'id' : produit.id }) }}">Ajouter au panier</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </li>
-                    {% endfor %}
-                </ul>
+                    <div class="row">
+                        <ul class="thumbnails">
+                            {% for produit in produits %}
+                                <li class="col-md-5">
+                                    <div class="thumbnail">
+                                        <img src="{{ produit.image.path }}" alt="DevAndClick" width="470" height="310">
+                                        <div class="caption">
+                                            <h4>{{ produit.nom }}</h4>
+                                            <p>{{ produit.prix|tva(produit.tva.multiplicate) }} €</p>
+                                            <a class="btn btn-primary"
+                                               href="{{ path('produit', { 'id' : produit.id }) }}">Plus d'infos</a>
+                                            {% if panier[produit.id] is not defined %}
+                                                <a class="btn btn-success"
+                                                   href="{{ path('ajouter', { 'id' : produit.id }) }}">Ajouter au
+                                                    panier</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 
+                    <div class="row offset1">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                {{ knp_pagination_render(produits) }}
+                            </ul>
+                        </nav>
+                    </div>
 
-            </div>
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        {{ knp_pagination_render(produits) }}
-                    </ul>
-                </nav>
+                </div>
+
 
             {% else %}
                 Aucun produit
